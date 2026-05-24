@@ -1631,8 +1631,27 @@
                         createSlides(reviewsBySwiper[1], wrapper2);
                         createSlides(reviewsBySwiper[2], wrapper3);
                         
-                        // Initialize Swiper instances
-                        initSwipers();
+                        // Initialize Swiper instances (without autoplay)
+                        initSwipers(false);
+                        
+                        // Intersection Observer to start autoplay when section is visible
+                        const reviewsSection = document.getElementById('reviews-section');
+                        if (reviewsSection) {
+                            let autoplayStarted = false;
+                            const reviewsObserver = new IntersectionObserver((entries) => {
+                                entries.forEach(entry => {
+                                    if (entry.isIntersecting && !autoplayStarted) {
+                                        autoplayStarted = true;
+                                        // Start autoplay for all swipers
+                                        if (swiper1) swiper1.autoplay.start();
+                                        if (swiper2) swiper2.autoplay.start();
+                                        if (swiper3) swiper3.autoplay.start();
+                                    }
+                                });
+                            }, { threshold: 0.3 }); // Start when 30% of section is visible
+                            
+                            reviewsObserver.observe(reviewsSection);
+                        }
                         
                         reviewsSection.style.display = 'block';
                     })
@@ -1648,7 +1667,7 @@
         // Initialize Swiper
         let swiper1, swiper2, swiper3;
         
-        function initSwipers() {
+        function initSwipers(startAutoplay = false) {
             // First swiper - left to right
             swiper1 = new Swiper('#swiper1', {
                 slidesPerView: 'auto',
@@ -1657,10 +1676,10 @@
                 freeMode: true,
                 freeModeMomentum: false,
                 speed: 5000,
-                autoplay: {
+                autoplay: startAutoplay ? {
                     delay: 0,
                     disableOnInteraction: false,
-                },
+                } : false,
                 allowTouchMove: true,
                 touchEventsTarget: 'wrapper',
             });
@@ -1673,11 +1692,11 @@
                 freeMode: true,
                 freeModeMomentum: false,
                 speed: 5000,
-                autoplay: {
+                autoplay: startAutoplay ? {
                     delay: 0,
                     disableOnInteraction: false,
                     reverseDirection: true,
-                },
+                } : false,
                 allowTouchMove: true,
                 touchEventsTarget: 'wrapper',
             });
@@ -1690,10 +1709,10 @@
                 freeMode: true,
                 freeModeMomentum: false,
                 speed: 5000,
-                autoplay: {
+                autoplay: startAutoplay ? {
                     delay: 0,
                     disableOnInteraction: false,
-                },
+                } : false,
                 allowTouchMove: true,
                 touchEventsTarget: 'wrapper',
             });
@@ -2286,16 +2305,33 @@
                 clearInterval(autoScrollInterval);
             }
 
-            // Настраиваем Intersection Observer для всей секции (чтобы запустить автопрокрутку)
+            // Настраиваем Intersection Observer для всей секции (чтобы запустить автопрокрутку и наблюдение за карточками)
             const resultsSection = document.getElementById('results-section');
             if (resultsSection) {
                 const sectionObserver = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting && !autoScrollStarted) {
                             autoScrollStarted = true;
+                            
+                            // Прокручиваем к среднему набору карточек и потом начинаем наблюдение
+                            setTimeout(() => {
+                                const singleSetWidth = resultsData.length * (
+                                    (resultsGrid.firstElementChild ? resultsGrid.firstElementChild.offsetWidth : 300) + 12
+                                );
+                                resultsGrid.scrollLeft = singleSetWidth;
+                                
+                                // Только после прокрутки начинаем наблюдать за карточками
+                                setTimeout(() => {
+                                    document.querySelectorAll('.result-card').forEach(card => {
+                                        observer.observe(card);
+                                    });
+                                }, 500);
+                            }, 300);
+                            
+                            // Запускаем автопрокрутку через 4 секунды после попадания на секцию
                             setTimeout(() => {
                                 startAutoScroll();
-                            }, 4000); // Запускаем автопрокрутку через 4 секунды после попадания на секцию
+                            }, 4000);
                         }
                     });
                 }, { threshold: 0.5 }); // Запускаем, когда 50% секции видно
@@ -2453,21 +2489,6 @@
                     if (autoScrollStarted) startAutoScroll();
                 });
             }
-
-            // Прокручиваем к среднему набору карточек и потом начинаем наблюдение
-            setTimeout(() => {
-                const singleSetWidth = resultsData.length * (
-                    (resultsGrid.firstElementChild ? resultsGrid.firstElementChild.offsetWidth : 300) + 12
-                );
-                resultsGrid.scrollLeft = singleSetWidth;
-                
-                // Только после прокрутки начинаем наблюдать за карточками — больше задержки, чтобы не запустить рано
-                setTimeout(() => {
-                    document.querySelectorAll('.result-card').forEach(card => {
-                        observer.observe(card);
-                    });
-                }, 500); // Увеличили задержку до 500ms
-            }, 300); // Увеличили первую задержку до 300ms
         }
 
         // Анимация одной карточки
