@@ -1,0 +1,3014 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="color-scheme" content="light">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Умпульс - Репетиторский центр</title>
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <style>
+        :root {
+            --primary-color: #1e40af;
+            --primary-dark: #1e3a8a;
+            --primary-light: #3b82f6;
+            --accent-color: #2563eb;
+            --text-color: #1e293b;
+            --text-light: #64748b;
+            --bg-color: #ffffff;
+            --bg-light: #eff6ff;
+            --bg-blue: #dbeafe;
+            --skeleton-color: #e2e8f0;
+            --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background: #ffffff;
+            height: 100%;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-color);
+            background: #ffffff;
+            line-height: 1.6;
+            font-size: 16px;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: none;
+            width: 100%;
+            height: 100%;
+            padding-top: 0;
+        }
+
+        /* === HERO SECTION === */
+        .hero {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            min-height: 100vh;
+            background: linear-gradient(180deg, #1e3a8a 0%, #2563eb 100%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            will-change: transform, opacity;
+            overflow: hidden;
+            transition: opacity 0.3s ease-out;
+            padding: 60px 0 50px;
+        }
+
+        .pull-indicator {
+            width: 120px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 3px;
+            cursor: pointer;
+            transition: opacity 0.2s ease-out;
+        }
+        
+        .unlock-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .hero-bottom-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .hero-main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 28px;
+            text-align: center;
+            padding: 0 20px;
+            padding-top: 40px;
+            will-change: opacity, transform;
+        }
+
+        .hero-large-logo {
+            height: 400px;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .hero-text {
+            font-size: 30px;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 500;
+            max-width: 320px;
+        }
+
+        /* === HEADER BAR === */
+        .hero-header-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 90px;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            background: transparent;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            box-shadow: none;
+            opacity: 0;
+            transform: translateY(-10px);
+            will-change: opacity, transform;
+        }
+
+        .hero-header-bar.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .hero-header-bar-inner {
+            width: 100%;
+            max-width: 480px;
+            height: 100%;
+            background: rgba(37, 99, 235, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(37, 99, 235, 0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px 15px;
+        }
+
+        .hero-header-top {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-header-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-header-logo-img {
+            height: 52px;
+            width: auto;
+            filter: brightness(0) invert(1);
+            margin-right: -4px;
+        }
+
+        .hero-header-logo-text {
+            font-size: 32px;
+            font-weight: 500;
+            color: white;
+            letter-spacing: -1.2px;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "Segoe UI", Roboto, sans-serif;
+        }
+
+        .hero-header-btn {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+            font-weight: 800;
+            padding: 10px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            white-space: nowrap;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+        }
+
+        .hero-header-btn.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .hero-header-btn:active {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(0.97);
+        }
+
+        .hero-header-btn.filled {
+            background: white;
+            color: var(--primary-color);
+            border-color: white;
+        }
+
+        /* === MAIN CONTENT === */
+        .content-section {
+            position: relative;
+            padding-top: calc(90px + 40px);
+            padding-bottom: 16px;
+            z-index: 90;
+            background: var(--bg-color);
+            border-radius: 24px 24px 0 0;
+            margin-top: 0;
+            min-height: 100vh;
+            transition: position 0s;
+        }
+
+        /* Center Offer Text */
+        .center-offer-text {
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .center-offer-title {
+            font-size: clamp(26px, 7vw, 34px);
+            font-weight: 800;
+            color: var(--text-color);
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .center-offer-subtitle {
+            font-size: clamp(15px, 4.2vw, 17px);
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        .content-section.fixed-when-hero-open {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 0 clamp(12px, 4vw, 20px);
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        /* Gallery */
+        .gallery-container {
+            margin-bottom: 24px;
+            width: 100%;
+        }
+
+        #center-gallery-swiper {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .swiper-slide.gallery-slide {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background-color: var(--bg-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .swiper-slide.gallery-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .swiper-pagination-bullet {
+            background-color: var(--skeleton-color);
+            width: 8px;
+            height: 8px;
+            opacity: 1;
+        }
+
+        .swiper-pagination-bullet-active {
+            background-color: var(--primary-color);
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-height: 52px;
+            padding: 14px 24px;
+            font-size: clamp(16px, 4.5vw, 18px);
+            font-weight: 600;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.15s ease;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+            box-shadow: 0 8px 24px rgba(30, 64, 175, 0.3);
+        }
+
+        .btn-primary:active {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.25);
+        }
+
+        .btn-large {
+            min-height: 60px;
+            padding: 18px 24px;
+            font-size: clamp(17px, 4.8vw, 19px);
+            font-weight: 700;
+        }
+
+        /* Sections */
+        .section {
+            padding: 32px 0;
+        }
+
+        .section-alt {
+            background-color: var(--bg-light);
+        }
+
+        .section-title {
+            font-size: clamp(20px, 5.5vw, 26px);
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 24px;
+        }
+
+        /* Advantages */
+        .advantages {
+            display: grid;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .advantage-card {
+            background: white;
+            padding: 20px;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(30, 64, 175, 0.08);
+            border-left: 4px solid var(--primary-light);
+        }
+
+        .advantage-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--bg-blue) 0%, var(--bg-light) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            font-size: 22px;
+        }
+
+        .advantage-text {
+            font-size: clamp(15px, 4vw, 16px);
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        /* Teachers */
+        .teachers-slider-container {
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .teachers-swiper {
+            padding: 10px 40px;
+        }
+
+        .teachers-swiper .swiper-wrapper {
+            align-items: center;
+        }
+
+        .teacher-avatar-slide {
+            width: auto;
+            padding: 0 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .teacher-avatar-wrapper {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--bg-blue) 0%, var(--bg-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary-color);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            opacity: 0.5;
+            transform: scale(0.85);
+            border: 2px solid transparent;
+            flex-shrink: 0;
+        }
+
+        .teacher-avatar-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Active (centered) slide */
+        .swiper-slide-active .teacher-avatar-wrapper {
+            opacity: 1;
+            transform: scale(1.1);
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 4px 20px rgba(30, 64, 175, 0.3);
+        }
+
+        /* Next and previous slides (adjacent to active) - slightly more visible */
+        .swiper-slide-next .teacher-avatar-wrapper,
+        .swiper-slide-prev .teacher-avatar-wrapper {
+            opacity: 0.7;
+            transform: scale(0.92);
+        }
+
+        /* Navigation buttons */
+        .teacher-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            z-index: 10;
+            user-select: none;
+        }
+
+        .teacher-nav-btn:active {
+            transform: translateY(-50%) scale(0.95);
+            background: #f1f5f9;
+        }
+
+        .teacher-nav-prev {
+            left: 0;
+        }
+
+        .teacher-nav-next {
+            right: 0;
+        }
+
+        .teacher-details {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(30, 64, 175, 0.08);
+        }
+
+        .teacher-details-name {
+            font-size: clamp(18px, 5vw, 22px);
+            font-weight: 800;
+            color: var(--text-color);
+            margin-bottom: 8px;
+        }
+
+        .teacher-details-stickers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .teacher-details-sticker {
+            background: linear-gradient(135deg, var(--bg-blue) 0%, #bfdbfe 100%);
+            border: 2px solid var(--primary-light);
+            border-radius: 10px;
+            padding: 6px 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .teacher-details-description {
+            font-size: clamp(14px, 4vw, 15px);
+            color: var(--text-light);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .teacher-details-description-text {
+            max-height: 120px;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .teacher-details-description-text.expanded {
+            max-height: 2000px;
+        }
+
+        .teacher-details-toggle-btn {
+            background: none;
+            border: none;
+            color: var(--primary-light);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 4px 0 0 0;
+            text-align: left;
+        }
+
+        .teacher-details-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .teacher-details-gallery-img {
+            width: clamp(90px, 24vw, 120px);
+            height: clamp(90px, 24vw, 120px);
+            border-radius: 12px;
+            background-color: var(--bg-blue);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 13px;
+            font-weight: 500;
+            overflow: hidden;
+        }
+
+        .teacher-details-gallery-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .teacher-details-fade {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .teacher-details-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Center Description */
+        .center-description {
+            background: white;
+            padding: clamp(16px, 4vw, 20px);
+            border-radius: clamp(12px, 3.5vw, 16px);
+            box-shadow: 0 2px 12px rgba(30, 64, 175, 0.08);
+            margin-bottom: clamp(16px, 4vw, 24px);
+            font-size: clamp(15px, 4vw, 16px);
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        /* Reviews */
+        .reviews-section {
+            overflow: hidden;
+            width: 100%;
+            max-width: 100vw;
+            box-sizing: border-box;
+            margin-top: 16px;
+        }
+
+        .swiper-container {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .swiper-wrapper {
+            display: flex;
+        }
+
+        .swiper-slide {
+            flex-shrink: 0;
+            width: auto;
+        }
+
+        .reviews-swiper {
+            margin-bottom: 10px;
+        }
+
+        .reviews-swiper .swiper-wrapper {
+            transition-timing-function: linear;
+        }
+
+        .review-card {
+            background: white;
+            padding: 10px 12px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(30, 64, 175, 0.08);
+            width: 220px;
+            max-width: 75vw;
+            flex-shrink: 0;
+            position: relative;
+            border-bottom-left-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .review-card::before {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            border-style: solid;
+            border-width: 6px 6px 0 0;
+            border-color: white transparent transparent transparent;
+        }
+
+        .review-author {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+            font-size: 13px;
+        }
+
+        .review-text {
+            color: var(--text-color);
+            line-height: 1.4;
+            font-size: 14px;
+            max-height: 48px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            white-space: normal;
+            word-break: break-word;
+            word-wrap: break-word;
+        }
+
+        .review-text.expanded {
+            max-height: 1000px;
+        }
+
+        .review-toggle {
+            background: none;
+            border: none;
+            color: var(--primary-light);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 4px 0 0 0;
+            text-align: left;
+        }
+
+        @media (max-width: 768px) {
+            .review-card {
+                width: 190px;
+                max-width: 70vw;
+                padding: 8px 10px;
+            }
+            
+            .review-author {
+                font-size: 12px;
+            }
+            
+            .review-text {
+                font-size: 13px;
+            }
+            
+            .review-toggle {
+                font-size: 11px;
+            }
+        }
+
+        /* Coupon */
+        .coupon-card {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+            padding: 28px;
+            border-radius: 18px;
+            text-align: center;
+            margin-bottom: 24px;
+            box-shadow: 0 12px 32px rgba(30, 64, 175, 0.35);
+        }
+
+        .coupon-title {
+            font-size: clamp(20px, 5.5vw, 26px);
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .coupon-subtitle {
+            font-size: clamp(15px, 4vw, 16px);
+            opacity: 0.95;
+            margin-bottom: 20px;
+        }
+
+        /* Messenger Buttons */
+        .messenger-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .messenger-buttons .btn {
+            flex: 1 1 calc(50% - 6px);
+            min-width: 140px;
+        }
+
+        .messenger-buttons .btn-max,
+        .messenger-buttons .btn-call {
+            flex: 1 1 100%;
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+        }
+
+        .btn-whatsapp:active {
+            background-color: #1DA851;
+        }
+
+        .btn-telegram {
+            background-color: #0088cc;
+            color: white;
+        }
+
+        .btn-telegram:active {
+            background-color: #006699;
+        }
+        
+        .btn-max {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+        }
+        
+        .btn-max:active {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+        }
+
+        .btn-call {
+            background-color: #25D366;
+            color: white;
+        }
+
+        .btn-call:active {
+            background-color: #1DA851;
+        }
+
+        .or-text {
+            width: 100%;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-color);
+            margin: 8px 0;
+        }
+
+        .btn-icon {
+            margin-right: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* FAQ Component */
+        .faq-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 18px 0;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 600;
+            color: #1f2937;
+            transition: color 0.2s ease;
+        }
+
+        .faq-question:hover {
+            color: #2563eb;
+        }
+
+        .faq-chevron {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+            color: #6b7280;
+        }
+
+        .faq-question:hover .faq-chevron {
+            color: #2563eb;
+        }
+
+        .faq-item.active .faq-chevron {
+            transform: rotate(180deg);
+            color: #2563eb;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.15s ease-out;
+        }
+        
+        .faq-item.active .faq-answer {
+            transition: max-height 0.4s ease-out;
+        }
+
+        .faq-answer p {
+            padding-bottom: 18px;
+            margin: 0;
+            font-size: 15px;
+            line-height: 1.6;
+            color: #4b5563;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px; /* Достаточно большой лимит */
+        }
+
+        /* Footer */
+        .footer {
+            padding: 24px 0;
+            text-align: center;
+            font-size: clamp(13px, 3.5vw, 14px);
+            color: var(--text-light);
+            border-top: 1px solid var(--bg-blue);
+        }
+
+        .footer a {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        /* Sticky CTA */
+        .sticky-cta {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            box-shadow: 0 6px 20px rgba(30, 64, 175, 0.4);
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.15s ease;
+            text-decoration: none;
+        }
+
+        .sticky-cta:active {
+            transform: scale(0.93);
+            box-shadow: 0 4px 14px rgba(30, 64, 175, 0.35);
+        }
+
+        /* QR placeholder */
+        .qr-placeholder {
+            text-align: center;
+            padding: 16px;
+            margin-top: 20px;
+            border: 2px dashed var(--bg-blue);
+            border-radius: 14px;
+            color: var(--text-light);
+            font-size: clamp(13px, 3.5vw, 14px);
+            background-color: var(--bg-light);
+        }
+
+        /* === RESULTS COMPONENT === */
+        .results-section {
+            padding: 16px 0 32px 0;
+            position: relative;
+        }
+
+        .results-carousel-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .results-carousel {
+            display: flex;
+            overflow-x: hidden;
+            gap: 12px;
+            padding: 4px 0 16px 0;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+
+        .results-carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .result-card {
+            background: white;
+            padding: 20px 16px;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(30, 64, 175, 0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex-shrink: 0;
+            width: calc(50% - 6px);
+            min-height: 320px;
+            scroll-snap-align: start;
+        }
+
+        .result-name {
+            margin-bottom: 4px;
+            flex-shrink: 0;
+        }
+
+        .result-subject {
+            margin-bottom: 16px;
+            flex-shrink: 0;
+        }
+
+        .speedometer-container {
+            flex-shrink: 0;
+            margin-bottom: auto;
+        }
+
+        /* Navigation arrows */
+        .carousel-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            z-index: 10;
+            user-select: none;
+        }
+
+        .carousel-nav-btn:active {
+            transform: translateY(-50%) scale(0.95);
+            background: #f1f5f9;
+        }
+
+        .carousel-nav-prev {
+            left: 0;
+        }
+
+        .carousel-nav-next {
+            right: 0;
+        }
+
+        /* Mobile responsive - 2 cards on all screens */
+        @media (max-width: 768px) {
+            .result-card {
+                width: calc(50% - 6px);
+                padding: 18px 14px;
+                min-height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .result-card {
+                width: calc(50% - 6px);
+                padding: 14px 10px;
+                min-height: 280px;
+            }
+            
+            .speedometer-container {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .speedometer-score {
+                font-size: 30px;
+            }
+            
+            .result-name {
+                font-size: 15px;
+            }
+            
+            .result-subject {
+                font-size: 11px;
+            }
+            
+            .admission-info {
+                font-size: 10px;
+                padding: 7px 8px;
+                flex-shrink: 0;
+            }
+        }
+
+        .admission-info {
+            margin-top: 16px;
+            padding: 10px 14px;
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary-color);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease-out; /* Fade in immediately when class is added */
+        }
+
+        .admission-info.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .result-name {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text-color);
+            margin-bottom: 4px;
+        }
+
+        .result-subject {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .speedometer-container {
+            position: relative;
+            width: 160px;
+            height: 160px;
+        }
+
+        .speedometer-svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .speedometer-bg {
+            fill: none;
+            stroke: #e2e8f0;
+            stroke-width: 12;
+        }
+
+        .speedometer-fill {
+            fill: none;
+            stroke-width: 12;
+            stroke-linecap: round;
+            stroke-dasharray: 440; /* 2 * PI * 70 (radius) = ~440 */
+            stroke-dashoffset: 440;
+            transition: stroke-dashoffset 1.2s ease-out;
+        }
+
+        .speedometer-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .speedometer-score {
+            font-size: 40px;
+            font-weight: 800;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+
+        .speedometer-prev {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-top: 6px;
+        }
+
+        /* === DESKTOP VERSION === */
+        @media (min-width: 769px) {
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                background: #f1f5f9;
+                min-height: 100vh;
+            }
+
+            #main-content {
+                width: 100%;
+                max-width: 480px;
+                background: white;
+                min-height: 100vh;
+                box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+                position: relative;
+            }
+
+            .content-section {
+                border-radius: 24px 24px 0 0;
+                margin-top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Content -->
+    <div id="main-content">
+        <!-- Section 1: Hero with Morphing Header & Splash Screen -->
+        <section class="hero" id="hero-section">
+            <div class="hero-main-content" id="hero-main-content">
+                <img src="УМ (синий).svg" alt="Умпульс" class="hero-large-logo" id="hero-large-logo">
+                <p class="hero-text" id="hero-text">Поможем подтянуть оценки за 1 месяц</p>
+            </div>
+            <div class="hero-bottom-section">
+                <div class="unlock-text">Разблокировать</div>
+                <div class="pull-indicator" id="pull-indicator"></div>
+            </div>
+        </section>
+        
+        <!-- Header Bar -->
+        <div class="hero-header-bar" id="hero-header-bar">
+            <div class="hero-header-bar-inner" id="hero-header-bar-inner">
+                <div class="hero-header-top">
+                    <div class="hero-header-logo" id="header-logo">
+                        <img src="УМ (синий).svg" alt="Ум" class="hero-header-logo-img">
+                        <span class="hero-header-logo-text">пульс</span>
+                    </div>
+                    <a 
+                        href="https://wa.me/79181570319?text=Здравствуйте!%20Хочу%20записаться%20на%20диагностику&utm_source=qr&utm_medium=landing" 
+                        class="hero-header-btn"
+                        id="header-btn"
+                    >
+                        Записаться на диагностику
+                    </a>
+                </div>
+                <div class="pull-indicator" id="pull-indicator-header"></div>
+            </div>
+        </div>
+
+        <!-- Section 2: Content (White Background) -->
+        <section class="content-section" id="content-section">
+            <div class="container">
+                <!-- Center Offer Text -->
+                <div class="center-offer-text" id="center-offer-text">
+                    <h1 class="center-offer-title" id="center-offer-title">Загрузка...</h1>
+                    <p class="center-offer-subtitle" id="center-offer-subtitle"></p>
+                </div>
+                
+                <!-- Center Photo Gallery -->
+                <div class="gallery-container">
+                    <div class="swiper" id="center-gallery-swiper">
+                        <div class="swiper-wrapper" id="gallery-wrapper">
+                            <!-- Photos will be loaded dynamically from "центр" folder -->
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+                
+                <!-- Main CTA Button -->
+                <a 
+                    href="https://wa.me/79181570319?text=Здравствуйте!%20Хочу%20записаться%20на%20диагностику&utm_source=qr&utm_medium=landing" 
+                    class="btn btn-primary btn-large"
+                    id="main-cta-button"
+                >
+                    Записаться на бесплатную диагностику
+                </a>
+            </div>
+        </section>
+
+        <!-- Section: Результаты учеников -->
+        <section class="section results-section" id="results-section">
+            <div class="container">
+                <h2 class="section-title">Результаты учеников</h2>
+                
+                <div class="results-carousel-container">
+                    <button class="carousel-nav-btn carousel-nav-prev" id="carousel-prev">‹</button>
+                    <div class="results-carousel" id="results-grid">
+                        <!-- Cards will be generated dynamically -->
+                    </div>
+                    <button class="carousel-nav-btn carousel-nav-next" id="carousel-next">›</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Отзывы -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Отзывы учеников</h2>
+            </div>
+            
+            <div class="reviews-section" id="reviews-section">
+                <!-- First Swiper (left to right) -->
+                <div class="swiper reviews-swiper" id="swiper1">
+                    <div class="swiper-wrapper" id="swiper-wrapper-1">
+                        <!-- Slides will be added dynamically -->
+                    </div>
+                </div>
+                
+                <!-- Second Swiper (right to left) -->
+                <div class="swiper reviews-swiper" id="swiper2">
+                    <div class="swiper-wrapper" id="swiper-wrapper-2">
+                        <!-- Slides will be added dynamically -->
+                    </div>
+                </div>
+                
+                <!-- Third Swiper (left to right) -->
+                <div class="swiper reviews-swiper" id="swiper3">
+                    <div class="swiper-wrapper" id="swiper-wrapper-3">
+                        <!-- Slides will be added dynamically -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Преподаватели -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Наши преподаватели</h2>
+                
+                <!-- Teacher Slider (Avatars) -->
+                <div class="teachers-slider-container">
+                    <div class="swiper teachers-swiper" id="teachers-swiper">
+                        <div class="swiper-wrapper" id="teachers-wrapper">
+                            <!-- Avatars will be loaded dynamically -->
+                        </div>
+                    </div>
+                    <!-- Navigation arrows -->
+                    <div class="teacher-nav-btn teacher-nav-prev" id="teacher-nav-prev">‹</div>
+                    <div class="teacher-nav-btn teacher-nav-next" id="teacher-nav-next">›</div>
+                </div>
+                
+                <!-- Teacher Details Section -->
+                <div class="teacher-details" id="teacher-details">
+                    <!-- Details will be loaded dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Финализация -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="coupon-card">
+                    <div class="coupon-title">🎁 Бесплатная диагностика</div>
+                    <div class="coupon-subtitle">Напишите — и мы подберём время под вас</div>
+                </div>
+
+                <div class="messenger-buttons">
+                    <a 
+                        href="https://wa.me/79181570319?text=Здравствуйте!%20Хочу%20записаться%20на%20пробный%20урок%20в%20Умпульс&utm_source=qr&utm_medium=landing" 
+                        class="btn btn-whatsapp"
+                    >
+                        <img src="WhatsApp.svg" alt="WhatsApp" class="btn-icon" style="width: 28px; height: 28px;"> WhatsApp
+                    </a>
+                    
+                    <a 
+                        href="https://t.me/ffrolovv" 
+                        class="btn btn-telegram"
+                    >
+                        <img src="Telegram.svg" alt="Telegram" class="btn-icon" style="width: 28px; height: 28px;"> Telegram
+                    </a>
+                    
+                    <button 
+                        id="btn-max" 
+                        class="btn btn-max"
+                        type="button"
+                    >
+                        <img src="MAX.svg" alt="MAX" class="btn-icon" style="width: 28px; height: 28px;"> MAX
+                    </button>
+                    
+                    <div class="or-text">или</div>
+                    
+                    <a 
+                        href="tel:+79181570319" 
+                        class="btn btn-call"
+                    >
+                        📞 Позвоните
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: FAQ -->
+        <section class="section section-alt" id="faq-section">
+            <div class="container">
+                <h2 class="section-title">Частые вопросы</h2>
+                <div id="faq-container" class="faq-container">
+                    <!-- FAQ items will be loaded here dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p id="copyright-year">© 2026 Умпульс. Все права защищены.</p>
+                <p style="font-style: italic; color: var(--text-light); font-size: 13px; line-height: 1.5;">На данном сайте не осуществляется сбор и обработка персональных данных. Все контакты происходят напрямую через мессенджеры Telegram и WhatsApp по инициативе пользователя. Переходя по ссылкам, вы руководствуетесь правилами конфиденциальности соответствующих сервисов.</p>
+            </div>
+        </footer>
+
+        <!-- Sticky CTA Button -->
+        <a 
+            href="https://wa.me/79181570319?text=Здравствуйте!%20Хочу%20записаться%20на%20пробный%20урок%20в%20Умпульс&utm_source=qr&utm_medium=landing" 
+            class="sticky-cta"
+            aria-label="Написать"
+        >
+            💬
+        </a>
+    </div>
+    
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <script>
+        // Gallery functionality - load photos and initialize Swiper
+        let centerGallerySwiper;
+        
+        function loadCenterGallery() {
+            const galleryWrapper = document.getElementById('gallery-wrapper');
+            if (!galleryWrapper) return;
+            
+            galleryWrapper.innerHTML = '';
+            
+            // Try to load up to 10 photos
+            let loadedPhotosCount = 0;
+            
+            function checkPhoto(i) {
+                if (i > 10) {
+                    // All photos checked - initialize Swiper if we have photos
+                    if (loadedPhotosCount > 0) {
+                        initCenterGallery();
+                    }
+                    return;
+                }
+                
+                const possibleNames = [
+                    'центр/' + i,
+                    'центр/фото ' + i,
+                    'центр/photo ' + i
+                ];
+                
+                let nameIndex = 0;
+                
+                function tryNextName() {
+                    if (nameIndex >= possibleNames.length) {
+                        checkPhoto(i + 1);
+                        return;
+                    }
+                    
+                    let extIndex = 0;
+                    
+                    function tryNextExt() {
+                        if (extIndex >= extensions.length) {
+                            nameIndex++;
+                            tryNextName();
+                            return;
+                        }
+                        
+                        const src = possibleNames[nameIndex] + '.' + extensions[extIndex];
+                        const img = new Image();
+                        
+                        img.onload = function() {
+                            const slide = document.createElement('div');
+                            slide.className = 'swiper-slide gallery-slide';
+                            
+                            const imgEl = document.createElement('img');
+                            imgEl.src = src;
+                            imgEl.alt = 'Фото центра ' + i;
+                            slide.appendChild(imgEl);
+                            
+                            galleryWrapper.appendChild(slide);
+                            loadedPhotosCount++;
+                            checkPhoto(i + 1);
+                        };
+                        
+                        img.onerror = function() {
+                            extIndex++;
+                            tryNextExt();
+                        };
+                        
+                        img.src = src;
+                    }
+                    
+                    tryNextExt();
+                }
+                
+                tryNextName();
+            }
+            
+            checkPhoto(1);
+        }
+        
+        function initCenterGallery() {
+            centerGallerySwiper = new Swiper('#center-gallery-swiper', {
+                slidesPerView: 1,
+                spaceBetween: 0,
+                loop: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                allowTouchMove: true,
+                touchEventsTarget: 'wrapper',
+            });
+        }
+
+        // Load center description
+        function loadCenterDescription() {
+            const titleEl = document.getElementById('center-offer-title');
+            const subtitleEl = document.getElementById('center-offer-subtitle');
+            if (!titleEl || !subtitleEl) return;
+            
+            const possibleFiles = [
+                'центр/описание.txt',
+                'центр/about.txt',
+                'центр/info.txt'
+            ];
+            
+            let fileIndex = 0;
+            
+            function tryNextFile() {
+                if (fileIndex >= possibleFiles.length) {
+                    titleEl.style.display = 'none';
+                    subtitleEl.style.display = 'none';
+                    return;
+                }
+                
+                fetch(possibleFiles[fileIndex])
+                    .then(response => {
+                        if (!response.ok) throw new Error('File not found');
+                        return response.text();
+                    })
+                    .then(text => {
+                        // Обрабатываем любые символы перевода строки (CRLF или LF)
+                        const lines = text.trim().split(/\r?\n/).filter(line => line.trim());
+                        
+                        if (lines.length > 0) {
+                            titleEl.textContent = lines[0].trim();
+                            titleEl.style.display = 'block';
+                            
+                            if (lines.length > 1) {
+                                // Для HTML используем <br> вместо \n
+                                subtitleEl.innerHTML = lines.slice(1).join('<br>').trim();
+                                subtitleEl.style.display = 'block';
+                            } else {
+                                subtitleEl.style.display = 'none';
+                            }
+                        } else {
+                            titleEl.style.display = 'none';
+                            subtitleEl.style.display = 'none';
+                        }
+                    })
+                    .catch(error => {
+                        fileIndex++;
+                        tryNextFile();
+                    });
+            }
+            
+            tryNextFile();
+        }
+
+        // Load reviews
+        function loadReviews() {
+            const wrapper1 = document.getElementById('swiper-wrapper-1');
+            const wrapper2 = document.getElementById('swiper-wrapper-2');
+            const wrapper3 = document.getElementById('swiper-wrapper-3');
+            const reviewsSection = document.getElementById('reviews-section');
+            
+            if (!wrapper1 || !wrapper2 || !wrapper3) return;
+            
+            const possibleFiles = [
+                'центр/отзывы.txt',
+                'центр/reviews.txt'
+            ];
+            
+            let fileIndex = 0;
+            
+            function tryNextFile() {
+                if (fileIndex >= possibleFiles.length) {
+                    reviewsSection.style.display = 'none';
+                    return;
+                }
+                
+                fetch(possibleFiles[fileIndex])
+                    .then(response => {
+                        if (!response.ok) throw new Error('File not found');
+                        return response.text();
+                    })
+                    .then(text => {
+                        // Обрабатываем любые символы перевода строки (CRLF или LF)
+                        const lines = text.trim().split(/\r?\n/).filter(line => line.trim());
+                        
+                        if (lines.length === 0) {
+                            reviewsSection.style.display = 'none';
+                            return;
+                        }
+                        
+                        // Parse all reviews
+                        const allReviews = [];
+                        lines.forEach(line => {
+                            const colonIndex = line.indexOf(':');
+                            if (colonIndex === -1) return;
+                            
+                            const name = line.substring(0, colonIndex).trim();
+                            const review = line.substring(colonIndex + 1).trim();
+                            
+                            if (!name || !review) return;
+                            
+                            allReviews.push({ name, review });
+                        });
+                        
+                        if (allReviews.length === 0) {
+                            reviewsSection.style.display = 'none';
+                            return;
+                        }
+                        
+                        // Distribute reviews across 3 swipers
+                        const reviewsBySwiper = [[], [], []];
+                        allReviews.forEach((review, index) => {
+                            reviewsBySwiper[index % 3].push(review);
+                        });
+                        
+                        // Function to create slides
+                        function createSlides(reviews, wrapper) {
+                            wrapper.innerHTML = '';
+                            
+                            // Duplicate reviews for infinite scroll
+                            const allSlides = [...reviews, ...reviews, ...reviews];
+                            
+                            allSlides.forEach(review => {
+                                const slide = document.createElement('div');
+                                slide.className = 'swiper-slide';
+                                slide.style.width = 'auto';
+                                slide.style.marginRight = '10px';
+                                
+                                const reviewCard = document.createElement('div');
+                                reviewCard.className = 'review-card';
+                                
+                                const isLong = review.review.length > 70;
+                                
+                                reviewCard.innerHTML = `
+                                    <div class="review-author">${review.name}</div>
+                                    <div class="review-text">${review.review}</div>
+                                    ${isLong ? '<button class="review-toggle" onclick="toggleReview(this)">Показать полностью →</button>' : ''}
+                                `;
+                                
+                                slide.appendChild(reviewCard);
+                                wrapper.appendChild(slide);
+                            });
+                        }
+                        
+                        // Create slides for all swipers
+                        createSlides(reviewsBySwiper[0], wrapper1);
+                        createSlides(reviewsBySwiper[1], wrapper2);
+                        createSlides(reviewsBySwiper[2], wrapper3);
+                        
+                        // Initialize Swiper instances
+                        initSwipers();
+                        
+                        reviewsSection.style.display = 'block';
+                    })
+                    .catch(error => {
+                        fileIndex++;
+                        tryNextFile();
+                    });
+            }
+            
+            tryNextFile();
+        }
+
+        // Initialize Swiper
+        let swiper1, swiper2, swiper3;
+        
+        function initSwipers() {
+            // First swiper - left to right
+            swiper1 = new Swiper('#swiper1', {
+                slidesPerView: 'auto',
+                spaceBetween: 0,
+                loop: true,
+                freeMode: true,
+                freeModeMomentum: false,
+                speed: 5000,
+                autoplay: {
+                    delay: 0,
+                    disableOnInteraction: false,
+                },
+                allowTouchMove: true,
+                touchEventsTarget: 'wrapper',
+            });
+
+            // Second swiper - right to left
+            swiper2 = new Swiper('#swiper2', {
+                slidesPerView: 'auto',
+                spaceBetween: 0,
+                loop: true,
+                freeMode: true,
+                freeModeMomentum: false,
+                speed: 5000,
+                autoplay: {
+                    delay: 0,
+                    disableOnInteraction: false,
+                    reverseDirection: true,
+                },
+                allowTouchMove: true,
+                touchEventsTarget: 'wrapper',
+            });
+
+            // Third swiper - left to right
+            swiper3 = new Swiper('#swiper3', {
+                slidesPerView: 'auto',
+                spaceBetween: 0,
+                loop: true,
+                freeMode: true,
+                freeModeMomentum: false,
+                speed: 5000,
+                autoplay: {
+                    delay: 0,
+                    disableOnInteraction: false,
+                },
+                allowTouchMove: true,
+                touchEventsTarget: 'wrapper',
+            });
+        }
+
+        // Toggle review expansion
+        function toggleReview(button) {
+            const card = button.closest('.review-card');
+            const text = card.querySelector('.review-text');
+            
+            if (text.classList.contains('expanded')) {
+                text.classList.remove('expanded');
+                button.textContent = 'Показать полностью →';
+            } else {
+                text.classList.add('expanded');
+                button.textContent = 'Скрыть ←';
+            }
+        }
+
+        // Try to load images with multiple extensions
+        const extensions = ['webp', 'jpg', 'jpeg', 'png'];
+        
+        function tryLoadImage(element, basePathWithoutExt) {
+            let extensionIndex = 0;
+            
+            function tryNextExtension() {
+                if (extensionIndex >= extensions.length) {
+                    // No more extensions to try - keep placeholder
+                    return;
+                }
+                
+                const src = basePathWithoutExt + '.' + extensions[extensionIndex];
+                const img = new Image();
+                
+                img.onload = function() {
+                    element.innerHTML = '';
+                    element.appendChild(img);
+                };
+                
+                img.onerror = function() {
+                    extensionIndex++;
+                    tryNextExtension();
+                };
+                
+                img.src = src;
+            }
+            
+            tryNextExtension();
+        }
+
+        // List of all possible teachers with their initials and full names
+        const allTeachers = [
+            { initials: 'МЕ', name: 'Михаил Евгеньевич' },
+            { initials: 'СИ', name: 'Софья Игоревна' },
+            { initials: 'КВ', name: 'Ксения Викторовна' },
+            { initials: 'РИ', name: 'Роман Игоревич' },
+            { initials: 'МД', name: 'Мия Дмитриевна' },
+            { initials: 'ОР', name: 'Отабек Ровшанович' },
+            { initials: 'МЗ', name: 'Михаил Заурович' },
+            { initials: 'АМ', name: 'Алексей Максимович' }
+        ];
+
+        // Store loaded teachers data and pre-rendered details
+        let teachersData = [];
+        let teachersSwiper;
+        let teacherDetailsElements = [];
+
+        // Function to check if teacher folder exists and load data
+        async function loadTeacherData(teacher) {
+            return new Promise((resolve) => {
+                let folderExists = false;
+                
+                // First try to load description.txt
+                fetch(teacher.initials + '/описание.txt')
+                    .then(response => {
+                        if (response.ok) {
+                            folderExists = true;
+                            loadTeacherCompleteData(teacher).then(data => resolve(data));
+                        } else {
+                            throw new Error('File not found');
+                        }
+                    })
+                    .catch(() => {
+                        // If description.txt not found, try to load avatar with various extensions
+                        const extensions = ['webp', 'jpg', 'jpeg', 'png'];
+                        let extIndex = 0;
+                        
+                        function tryNextExt() {
+                            if (extIndex >= extensions.length) {
+                                resolve(null);
+                                return;
+                            }
+                            
+                            const img = new Image();
+                            img.onload = function() {
+                                loadTeacherCompleteData(teacher).then(data => resolve(data));
+                            };
+                            img.onerror = function() {
+                                extIndex++;
+                                tryNextExt();
+                            };
+                            img.src = teacher.initials + '/1.' + extensions[extIndex];
+                        }
+                        
+                        tryNextExt();
+                    });
+            });
+        }
+
+        // Function to load complete teacher data
+        async function loadTeacherCompleteData(teacher) {
+            const data = {
+                initials: teacher.initials,
+                name: teacher.name,
+                avatar: '',
+                stickers: [],
+                description: '',
+                gallery: []
+            };
+
+            // Load avatar
+            data.avatar = await loadAvatar(teacher.initials);
+
+            // Load description and stickers
+            const descData = await loadDescription(teacher.initials);
+            if (descData) {
+                data.stickers = descData.stickers;
+                data.description = descData.description;
+            }
+
+            // Load gallery
+            data.gallery = await loadGallery(teacher.initials);
+
+            return data;
+        }
+
+        // Load avatar
+        function loadAvatar(folder) {
+            return new Promise((resolve) => {
+                const possibleNames = [
+                    folder + '/1',
+                    folder + '/avatar',
+                    folder + '/' + folder + ' 1',
+                    folder + '/' + folder
+                ];
+                let nameIndex = 0;
+
+                function tryNextName() {
+                    if (nameIndex >= possibleNames.length) {
+                    resolve('');
+                    return;
+                }
+                let extIndex = 0;
+
+                function tryNextExt() {
+                    if (extIndex >= extensions.length) {
+                        nameIndex++;
+                        tryNextName();
+                        return;
+                    }
+                    const src = possibleNames[nameIndex] + '.' + extensions[extIndex];
+                    const img = new Image();
+                    img.onload = function() {
+                        resolve(src);
+                    };
+                    img.onerror = function() {
+                        extIndex++;
+                        tryNextExt();
+                    };
+                    img.src = src;
+                }
+                tryNextExt();
+            }
+            tryNextName();
+            });
+        }
+
+        // Load description and stickers
+        function loadDescription(folder) {
+            return new Promise((resolve) => {
+                const possibleFiles = [
+                    folder + '/описание.txt',
+                    folder + '/bio.txt',
+                    folder + '/about.txt'
+                ];
+                let fileIndex = 0;
+
+                function tryNextFile() {
+                    if (fileIndex >= possibleFiles.length) {
+                        resolve(null);
+                        return;
+                    }
+                    fetch(possibleFiles[fileIndex])
+                        .then(response => {
+                            if (!response.ok) throw new Error('File not found');
+                            return response.text();
+                        })
+                        .then(text => {
+                            // Обрабатываем любые символы перевода строки (CRLF или LF)
+                            const lines = text.trim().split(/\r?\n/);
+                            let stickers = [];
+                            let description = '';
+                            if (lines.length > 0) {
+                                const firstLine = lines[0].trim();
+                                stickers = firstLine.split('/').map(s => s.trim()).filter(s => s);
+                                // Для HTML используем <br> вместо \n
+                                description = lines.slice(1).join('<br>').trim();
+                            }
+                            resolve({ stickers, description });
+                        })
+                        .catch(error => {
+                            fileIndex++;
+                            tryNextFile();
+                        });
+                }
+                tryNextFile();
+            });
+        }
+
+        // Load gallery images
+        function loadGallery(folder) {
+            return new Promise((resolve) => {
+                const gallery = [];
+                let imagesLoaded = 0;
+                let totalToCheck = 9; // Check from 2 to 10
+                let checkedCount = 0;
+
+                function checkAndAddImage(num) {
+                    const possibleNames = [
+                        folder + '/' + num,
+                        folder + '/' + folder + ' ' + num
+                    ];
+                    let nameIndex = 0;
+
+                    function tryNextName() {
+                        if (nameIndex >= possibleNames.length) {
+                            checkedCount++;
+                            if (checkedCount === totalToCheck) {
+                                resolve(gallery);
+                            }
+                            return;
+                        }
+                        let extIndex = 0;
+
+                        function tryNextExt() {
+                            if (extIndex >= extensions.length) {
+                                nameIndex++;
+                                tryNextName();
+                                return;
+                            }
+                            const src = possibleNames[nameIndex] + '.' + extensions[extIndex];
+                            const img = new Image();
+                            img.onload = function() {
+                                gallery.push(src);
+                                checkedCount++;
+                                if (checkedCount === totalToCheck) {
+                                    resolve(gallery);
+                                }
+                            };
+                            img.onerror = function() {
+                                extIndex++;
+                                tryNextExt();
+                            };
+                            img.src = src;
+                        }
+                        tryNextExt();
+                    }
+                    tryNextName();
+                }
+
+                for (let i = 2; i <= 10; i++) {
+                    checkAndAddImage(i);
+                }
+            });
+        }
+
+        // Initialize teacher slider
+        async function initTeachersSlider() {
+            const teachersWrapper = document.getElementById('teachers-wrapper');
+            if (!teachersWrapper) return;
+
+            // Load all teachers data
+            const loadedTeachers = [];
+            for (const teacher of allTeachers) {
+                const data = await loadTeacherData(teacher);
+                if (data) {
+                    loadedTeachers.push(data);
+                }
+            }
+
+            if (loadedTeachers.length === 0) return;
+
+            teachersData = loadedTeachers;
+
+            // Preload all images first
+            await preloadAllTeacherImages();
+
+            // Pre-render all teacher details
+            preRenderTeacherDetails();
+
+            // Create slides
+            loadedTeachers.forEach((teacher, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'swiper-slide teacher-avatar-slide';
+                slide.dataset.teacherIndex = index;
+
+                const avatarWrapper = document.createElement('div');
+                avatarWrapper.className = 'teacher-avatar-wrapper';
+
+                if (teacher.avatar) {
+                    const img = document.createElement('img');
+                    img.src = teacher.avatar;
+                    img.alt = teacher.name;
+                    avatarWrapper.appendChild(img);
+                } else {
+                    avatarWrapper.textContent = teacher.initials;
+                }
+
+                slide.appendChild(avatarWrapper);
+                teachersWrapper.appendChild(slide);
+            });
+
+            // Initialize Swiper
+            teachersSwiper = new Swiper('#teachers-swiper', {
+                slidesPerView: 3,
+                centeredSlides: true,
+                spaceBetween: 0,
+                loop: true,
+                allowTouchMove: true,
+                touchEventsTarget: 'wrapper',
+                speed: 300,
+                slideToClickedSlide: true,
+                grabCursor: true,
+                touchAngle: 45,
+                resistanceRatio: 0.85,
+                threshold: 5,
+                touchStartPreventDefault: true,
+                watchSlidesProgress: true,
+                freeMode: true,
+                freeModeSticky: true,
+                freeModeMomentum: true,
+                freeModeMomentumRatio: 0.5,
+                freeModeMomentumVelocityRatio: 0.5,
+                on: {
+                    init: function() {
+                        const activeSlide = this.slides[this.activeIndex];
+                        const teacherIndex = parseInt(activeSlide.dataset.teacherIndex);
+                        updateTeacherDetails(teacherIndex);
+                    },
+                    slideChange: function() {
+                        const activeSlide = this.slides[this.activeIndex];
+                        const teacherIndex = parseInt(activeSlide.dataset.teacherIndex);
+                        updateTeacherDetails(teacherIndex);
+                    },
+                    slideChangeTransitionStart: function() {
+                        const activeSlide = this.slides[this.activeIndex];
+                        const teacherIndex = parseInt(activeSlide.dataset.teacherIndex);
+                        updateTeacherDetails(teacherIndex);
+                    }
+                }
+            });
+
+            // Add navigation button handlers
+            const prevBtn = document.getElementById('teacher-nav-prev');
+            const nextBtn = document.getElementById('teacher-nav-next');
+
+            if (prevBtn) {
+                prevBtn.addEventListener('click', function() {
+                    teachersSwiper.slidePrev();
+                });
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function() {
+                    teachersSwiper.slideNext();
+                });
+            }
+        }
+
+        // Preload an image
+        function preloadImage(src) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.onload = resolve;
+                img.onerror = resolve;
+                img.src = src;
+            });
+        }
+
+        // Preload all teacher images
+        async function preloadAllTeacherImages() {
+            const allImages = [];
+            teachersData.forEach(teacher => {
+                if (teacher.avatar) allImages.push(preloadImage(teacher.avatar));
+                teacher.gallery.forEach(src => allImages.push(preloadImage(src)));
+            });
+            await Promise.all(allImages);
+        }
+
+        // Pre-render all teacher details elements
+        function preRenderTeacherDetails() {
+            teacherDetailsElements = teachersData.map((teacher, index) => {
+                const container = document.createElement('div');
+                container.className = 'teacher-details-fade';
+                container.dataset.teacherIndex = index;
+                container.style.display = 'none';
+
+                let stickersHtml = teacher.stickers.map(sticker =>
+                    `<div class="teacher-details-sticker">${sticker}</div>`
+                ).join('');
+
+                let galleryHtml = teacher.gallery.map(src =>
+                    `<div class="teacher-details-gallery-img"><img src="${src}" alt=""></div>`
+                ).join('');
+
+                const isLongDescription = teacher.description.length > 180;
+
+                container.innerHTML = `
+                    <div class="teacher-details-name">${teacher.name}</div>
+                    <div class="teacher-details-stickers">${stickersHtml}</div>
+                    <div class="teacher-details-description">
+                        <div class="teacher-details-description-text ${isLongDescription ? '' : 'expanded'}">${teacher.description}</div>
+                        ${isLongDescription ? '<button class="teacher-details-toggle-btn" onclick="toggleTeacherDescription(this)">Читать полностью →</button>' : ''}
+                    </div>
+                    ${galleryHtml ? `<div class="teacher-details-gallery">${galleryHtml}</div>` : ''}
+                `;
+
+                return container;
+            });
+
+            const detailsEl = document.getElementById('teacher-details');
+            if (detailsEl) {
+                teacherDetailsElements.forEach(el => detailsEl.appendChild(el));
+            }
+        }
+
+        // Toggle expandable description
+        function toggleTeacherDescription(button) {
+            const descriptionContainer = button.closest('.teacher-details-description');
+            const textEl = descriptionContainer.querySelector('.teacher-details-description-text');
+            
+            if (textEl.classList.contains('expanded')) {
+                textEl.classList.remove('expanded');
+                button.textContent = 'Читать полностью →';
+            } else {
+                textEl.classList.add('expanded');
+                button.textContent = 'Скрыть ←';
+            }
+        }
+
+        // Update teacher details with fade animation - now just swaps visibility
+        function updateTeacherDetails(teacherIndex) {
+            const detailsEl = document.getElementById('teacher-details');
+            if (!detailsEl || teachersData.length === 0) return;
+
+            // Hide all
+            teacherDetailsElements.forEach(el => {
+                el.classList.remove('visible');
+                el.style.display = 'none';
+            });
+
+            // Show active
+            const activeEl = teacherDetailsElements[teacherIndex];
+            if (activeEl) {
+                activeEl.style.display = 'block';
+                requestAnimationFrame(() => {
+                    activeEl.classList.add('visible');
+                });
+            }
+        }
+
+        // === RESULTS COMPONENT ===
+        let resultsData = [];
+
+        // Загрузка данных из файла
+        function loadResultsData() {
+            const possibleFiles = [
+                'центр/результаты',
+                'центр/результаты.txt'
+            ];
+            
+            let fileIndex = 0;
+            
+            function tryNextFile() {
+                if (fileIndex >= possibleFiles.length) {
+                    // Если файл не найден, используем дефолтные данные
+                    resultsData = [
+                        { name: 'Игорь', subject: 'Физика (ЕГЭ)', scoreBefore: 38, scoreAfter: 84, city: 'Москва', university: 'ВШЭ' },
+                        { name: 'Данил', subject: 'Русский язык (ЕГЭ)', scoreBefore: 45, scoreAfter: 92, city: 'Питер', university: 'СПбГУ' }
+                    ];
+                    initResultsCards();
+                    return;
+                }
+                
+                fetch(possibleFiles[fileIndex])
+                    .then(response => {
+                        if (!response.ok) throw new Error('File not found');
+                        return response.text();
+                    })
+                    .then(text => {
+                        // Обрабатываем любые символы перевода строки (CRLF или LF)
+                        const lines = text.trim().split(/\r?\n/).filter(line => line.trim());
+                        
+                        resultsData = lines.map(line => {
+                            // Парсим строку в разных форматах
+                            let match = line.match(/^(.+?)\. До (\d+)\. После (\d+)\. (.+?)\. Поступил[а]? в (.+?) в (.+?)\.?$/);
+                            
+                            if (match) {
+                                return {
+                                    name: match[1].trim(),
+                                    scoreBefore: parseInt(match[2]),
+                                    scoreAfter: parseInt(match[3]),
+                                    subject: match[4].trim(),
+                                    city: match[5].trim(),
+                                    university: match[6].trim()
+                                };
+                            }
+                            
+                            // Парсим формат: [Имя]. До [Балл_До]. После [Балл_После]. [Предмет]. Поступил(а) в [ВУЗ]
+                            match = line.match(/^(.+?)\. До (\d+)\. После (\d+)\. (.+?)\. Поступил[а]? в (.+?)\.?$/);
+                            
+                            if (match) {
+                                return {
+                                    name: match[1].trim(),
+                                    scoreBefore: parseInt(match[2]),
+                                    scoreAfter: parseInt(match[3]),
+                                    subject: match[4].trim(),
+                                    city: '',
+                                    university: match[5].trim()
+                                };
+                            }
+                            
+                            return null;
+                        }).filter(Boolean);
+                        
+                        if (resultsData.length === 0) {
+                            // Если не удалось распарсить, используем дефолтные данные
+                            resultsData = [
+                                { name: 'Игорь', subject: 'Физика (ЕГЭ)', scoreBefore: 38, scoreAfter: 84, city: 'Москва', university: 'ВШЭ' },
+                                { name: 'Данил', subject: 'Русский язык (ЕГЭ)', scoreBefore: 45, scoreAfter: 92, city: 'Питер', university: 'СПбГУ' }
+                            ];
+                        }
+                        
+                        initResultsCards();
+                    })
+                    .catch(error => {
+                        fileIndex++;
+                        tryNextFile();
+                    });
+            }
+            
+            tryNextFile();
+        }
+
+        // Инициализация карточек результатов
+        function initResultsCards() {
+            const resultsGrid = document.getElementById('results-grid');
+            if (!resultsGrid) return;
+
+            // Настраиваем переменные и функции для навигации и автопрокрутки
+            let isScrolling = false;
+            let autoScrollInterval;
+            let autoScrollStarted = false;
+            let observer; // Объявляем observer здесь, чтобы он был доступен везде
+            
+            // Вспомогательная функция для получения точного смещения для 2 карточек
+            function getScrollAmount() {
+                const carousel = document.getElementById('results-grid');
+                if (!carousel || !carousel.firstElementChild) return 600;
+                const cardWidth = carousel.firstElementChild.offsetWidth + 12;
+                return cardWidth * 2;
+            }
+            
+            // Функция для запуска автоматической прокрутки
+            function startAutoScroll() {
+                stopAutoScroll(); // Всегда останавливаем предыдущий интервал перед запуском нового
+                autoScrollInterval = setInterval(() => {
+                    const carousel = document.getElementById('results-grid');
+                    if (!carousel || isScrolling) return;
+                    
+                    carousel.scrollBy({
+                        left: getScrollAmount(), // Прокручиваем на 2 карточки вперед
+                        behavior: 'smooth'
+                    });
+                }, 4000); // Каждые 4 секунды
+            }
+            
+            // Функция для остановки автоматической прокрутки
+            function stopAutoScroll() {
+                clearInterval(autoScrollInterval);
+            }
+
+            // Настраиваем Intersection Observer для всей секции (чтобы запустить автопрокрутку)
+            const resultsSection = document.getElementById('results-section');
+            if (resultsSection) {
+                const sectionObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && !autoScrollStarted) {
+                            autoScrollStarted = true;
+                            setTimeout(() => {
+                                startAutoScroll();
+                            }, 4000); // Запускаем автопрокрутку через 4 секунды после попадания на секцию
+                        }
+                    });
+                }, { threshold: 0.5 }); // Запускаем, когда 50% секции видно
+                
+                sectionObserver.observe(resultsSection);
+            }
+
+            // Настраиваем Intersection Observer для анимации карточек
+            const observerOptions = {
+                threshold: 0.9, // Анимация запускается, когда 90% карточки видно — запускается только когда доскроллить до карточки
+                rootMargin: '0px'
+            };
+
+            const animatedCards = new Set(); // Отслеживаем, какие карточки уже анимировали
+
+            observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const card = entry.target;
+                        const uniqueId = card.dataset.uniqueId;
+                        
+                        if (!animatedCards.has(uniqueId)) {
+                            animateResultCard(card);
+                            animatedCards.add(uniqueId);
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            // Создаем карточки для каждого ученика
+            function createCard(student, index, uniqueId) {
+                const card = document.createElement('div');
+                card.className = 'result-card';
+                card.dataset.index = index;
+                card.dataset.uniqueId = uniqueId;
+                card.dataset.scoreBefore = student.scoreBefore;
+                card.dataset.scoreAfter = student.scoreAfter;
+
+                // Максимальная длина окружности (2 * PI * radius)
+                const circumference = 440;
+
+                card.innerHTML = `
+                    <div class="result-name">${student.name}</div>
+                    <div class="result-subject">${student.subject}</div>
+                    <div class="speedometer-container">
+                        <svg class="speedometer-svg" viewBox="0 0 160 160">
+                            <defs>
+                                <linearGradient id="score-gradient-${uniqueId}" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#ef4444;stop-opacity:1" />
+                                    <stop offset="35%" style="stop-color:#f59e0b;stop-opacity:1" />
+                                    <stop offset="70%" style="stop-color:#16a34a;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#16a34a;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <circle class="speedometer-bg" cx="80" cy="80" r="70" />
+                            <circle 
+                                class="speedometer-fill" 
+                                cx="80" cy="80" r="70" 
+                                stroke="url(#score-gradient-${uniqueId})"
+                            />
+                        </svg>
+                        <div class="speedometer-content">
+                            <div class="speedometer-score">${student.scoreBefore}</div>
+                            <div class="speedometer-prev">было: ${student.scoreBefore}</div>
+                        </div>
+                    </div>
+                    <div class="admission-info">🔥 Поступил${student.name.endsWith('а') ? 'а' : ''} в ${student.city ? student.city + ' в ' : ''}${student.university}</div>
+                `;
+
+                return card;
+            }
+
+            // Дублируем данные 3 раза для бесконечной карусели
+            const allStudents = [...resultsData, ...resultsData, ...resultsData];
+            let uniqueId = 0;
+            
+            allStudents.forEach((student, index) => {
+                const originalIndex = index % resultsData.length;
+                const card = createCard(student, originalIndex, uniqueId++);
+                resultsGrid.appendChild(card);
+            });
+
+            // Настраиваем навигационные кнопки
+            const prevBtn = document.getElementById('carousel-prev');
+            const nextBtn = document.getElementById('carousel-next');
+            const carousel = document.getElementById('results-grid');
+            
+            if (prevBtn && nextBtn && carousel) {
+                // Кнопка "назад"
+                prevBtn.addEventListener('click', () => {
+                    if (isScrolling) return;
+                    isScrolling = true;
+                    stopAutoScroll();
+                    
+                    carousel.scrollBy({
+                        left: -getScrollAmount(), // Прокручиваем на 2 карточки назад
+                        behavior: 'smooth'
+                    });
+                    
+                    setTimeout(() => { 
+                        isScrolling = false;
+                        if (autoScrollStarted) {
+                            startAutoScroll(); // Возобновляем автопрокрутку
+                        }
+                    }, 500);
+                });
+
+                // Кнопка "вперед"
+                nextBtn.addEventListener('click', () => {
+                    if (isScrolling) return;
+                    isScrolling = true;
+                    stopAutoScroll();
+                    
+                    carousel.scrollBy({
+                        left: getScrollAmount(), // Прокручиваем на 2 карточки вперед
+                        behavior: 'smooth'
+                    });
+                    
+                    setTimeout(() => { 
+                        isScrolling = false;
+                        if (autoScrollStarted) {
+                            startAutoScroll(); // Возобновляем автопрокрутку
+                        }
+                    }, 500);
+                });
+
+                // Обработка бесконечной прокрутки
+                carousel.addEventListener('scroll', () => {
+                    const singleSetWidth = resultsData.length * (
+                        (carousel.firstElementChild ? carousel.firstElementChild.offsetWidth : 300) + 12
+                    );
+                    
+                    // Если дошли до конца последнего набора, переходим к середине первого набора
+                    if (carousel.scrollLeft >= singleSetWidth * 2 - carousel.offsetWidth) {
+                        carousel.scrollLeft = carousel.scrollLeft - singleSetWidth;
+                    }
+                    
+                    // Если дошли до начала первого набора, переходим к середине последнего набора
+                    if (carousel.scrollLeft <= 0) {
+                        carousel.scrollLeft = carousel.scrollLeft + singleSetWidth;
+                    }
+                });
+                
+                // Останавливаем автопрокрутку при наведении или касании
+                carousel.addEventListener('mouseenter', () => {
+                    if (autoScrollStarted) stopAutoScroll();
+                });
+                carousel.addEventListener('mouseleave', () => {
+                    if (autoScrollStarted) startAutoScroll();
+                });
+                carousel.addEventListener('touchstart', () => {
+                    if (autoScrollStarted) stopAutoScroll();
+                });
+                carousel.addEventListener('touchend', () => {
+                    if (autoScrollStarted) startAutoScroll();
+                });
+            }
+
+            // Прокручиваем к среднему набору карточек и потом начинаем наблюдение
+            setTimeout(() => {
+                const singleSetWidth = resultsData.length * (
+                    (resultsGrid.firstElementChild ? resultsGrid.firstElementChild.offsetWidth : 300) + 12
+                );
+                resultsGrid.scrollLeft = singleSetWidth;
+                
+                // Только после прокрутки начинаем наблюдать за карточками — больше задержки, чтобы не запустить рано
+                setTimeout(() => {
+                    document.querySelectorAll('.result-card').forEach(card => {
+                        observer.observe(card);
+                    });
+                }, 500); // Увеличили задержку до 500ms
+            }, 300); // Увеличили первую задержку до 300ms
+        }
+
+        // Анимация одной карточки
+        function animateResultCard(card) {
+            const scoreBefore = parseInt(card.dataset.scoreBefore);
+            const scoreAfter = parseInt(card.dataset.scoreAfter);
+            const circumference = 440;
+
+            // Анимируем шкалу
+            const fillCircle = card.querySelector('.speedometer-fill');
+            const offsetBefore = circumference - (scoreBefore / 100) * circumference;
+            const offsetAfter = circumference - (scoreAfter / 100) * circumference;
+            
+            fillCircle.style.strokeDashoffset = offsetBefore;
+            
+            // Через небольшой задержкой запускаем анимацию до конечного значения
+            requestAnimationFrame(() => {
+                fillCircle.style.strokeDashoffset = offsetAfter;
+            });
+
+            // Анимируем счетчик
+            const scoreEl = card.querySelector('.speedometer-score');
+            const duration = 1000; // Длительность анимации в мс (ровно 1 секунда)
+            const startTime = performance.now();
+
+            function updateScore(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Функция прогресса (ease-out)
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                const currentScore = Math.round(scoreBefore + (scoreAfter - scoreBefore) * easeOut);
+                
+                scoreEl.textContent = currentScore;
+
+                if (progress < 1) {
+                    requestAnimationFrame(updateScore);
+                }
+            }
+
+            requestAnimationFrame(updateScore);
+
+            // Показываем блок с информацией о поступлении
+            const admissionInfo = card.querySelector('.admission-info');
+            if (admissionInfo) {
+                setTimeout(() => {
+                    admissionInfo.classList.add('visible');
+                }, 600); // Показываем на середине анимации спидометра (0.6 секунды)
+            }
+        }
+
+        // Инициализация результатов
+        function initResults() {
+            loadResultsData();
+        }
+
+        // === FAQ COMPONENT ===
+        function loadFAQData() {
+            const faqContainer = document.getElementById('faq-container');
+            if (!faqContainer) return;
+
+            const possibleFiles = [
+                'центр/faq',
+                'центр/FAQ',
+                'центр/faq.txt',
+                'центр/FAQ.txt'
+            ];
+            
+            let fileIndex = 0;
+            
+            function tryNextFile() {
+                if (fileIndex >= possibleFiles.length) {
+                    // Если файл не найден, используем дефолтные данные
+                    const defaultFAQ = [
+                        {
+                            question: '1. Как проходят занятия?',
+                            answer: 'Занятия проходят в небольших группах или индивидуально, с учетом особенностей каждого ученика.'
+                        },
+                        {
+                            question: '2. Сколько стоит пробное занятие?',
+                            answer: 'Пробное занятие бесплатное! Заполните форму или напишите нам в WhatsApp/Telegram/MAX.'
+                        }
+                    ];
+                    renderFAQ(defaultFAQ);
+                    return;
+                }
+                
+                fetch(possibleFiles[fileIndex])
+                    .then(response => {
+                        if (!response.ok) throw new Error('File not found');
+                        return response.text();
+                    })
+                    .then(text => {
+                        // Обрабатываем любые символы перевода строки (CRLF или LF)
+                        const lines = text.trim().split(/\r?\n/).filter(line => line.trim());
+                        
+                        const faqItems = [];
+                        let currentQuestion = null;
+                        let currentAnswer = [];
+                        
+                        lines.forEach(line => {
+                            // Ищем вопросы: строка, начинающаяся с цифры, точки, вопроса
+                            if (/^\d+\.\s*.+\?$/.test(line.trim())) {
+                                if (currentQuestion) {
+                                    faqItems.push({
+                                        question: currentQuestion,
+                                        answer: currentAnswer.join('<br>')
+                                    });
+                                }
+                                currentQuestion = line.trim();
+                                currentAnswer = [];
+                            } else if (currentQuestion) {
+                                currentAnswer.push(line.trim());
+                            }
+                        });
+                        
+                        // Добавляем последний вопрос
+                        if (currentQuestion) {
+                            faqItems.push({
+                                question: currentQuestion,
+                                answer: currentAnswer.join('<br>')
+                            });
+                        }
+                        
+                        if (faqItems.length > 0) {
+                            renderFAQ(faqItems);
+                        } else {
+                            // Если не удалось распарсить, используем дефолтные
+                            const defaultFAQ = [
+                                {
+                                    question: '1. Как проходят занятия?',
+                                    answer: 'Занятия проходят в небольших группах или индивидуально, с учетом особенностей каждого ученика.'
+                                },
+                                {
+                                    question: '2. Сколько стоит пробное занятие?',
+                                    answer: 'Пробное занятие бесплатное! Заполните форму или напишите нам в WhatsApp/Telegram/MAX.'
+                                }
+                            ];
+                            renderFAQ(defaultFAQ);
+                        }
+                    })
+                    .catch(error => {
+                        fileIndex++;
+                        tryNextFile();
+                    });
+            }
+            
+            tryNextFile();
+        }
+
+        function renderFAQ(items) {
+            const faqContainer = document.getElementById('faq-container');
+            if (!faqContainer) return;
+            
+            faqContainer.innerHTML = '';
+            
+            items.forEach((item, index) => {
+                const faqItem = document.createElement('div');
+                faqItem.className = 'faq-item';
+                
+                faqItem.innerHTML = `
+                    <button class="faq-question" type="button">
+                        <span>${item.question}</span>
+                        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>${item.answer}</p>
+                    </div>
+                `;
+                
+                faqContainer.appendChild(faqItem);
+            });
+            
+            // Добавляем обработчики кликов для аккордеона
+            initFAQAccordion();
+        }
+
+        function initFAQAccordion() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    
+                    // Закрываем все открытые вопросы
+                    faqItems.forEach(otherItem => {
+                        otherItem.classList.remove('active');
+                    });
+                    
+                    // Открываем текущий, если он не был открыт
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        }
+
+        function initFAQ() {
+            loadFAQData();
+        }
+
+        // Load center gallery and reviews
+        loadCenterGallery();
+        loadReviews();
+        loadCenterDescription();
+        initTeachersSlider();
+        initResults();
+        initFAQ();
+        
+        // Initialize MAX button
+        function initMaxButton() {
+            const maxBtn = document.getElementById('btn-max');
+            if (maxBtn) {
+                function handleButtonClick() {
+                    const phoneNumber = '+7 918 157 03 19';
+                    
+                    // Replace button content with phone number
+                    maxBtn.innerHTML = `
+                        <img src="MAX.svg" alt="MAX" class="btn-icon" style="width: 28px; height: 28px;"> 
+                        <span 
+                            style="
+                                user-select: text;
+                                -webkit-user-select: text;
+                                -moz-user-select: text;
+                                -ms-user-select: text;
+                                cursor: text;
+                                text-align: center;
+                            "
+                        >${phoneNumber}</span>
+                    `;
+                    
+                    // Make button unclickable
+                    maxBtn.style.pointerEvents = 'none';
+                    maxBtn.style.opacity = '0.8';
+                }
+                
+                // Add both click and touch events for mobile
+                maxBtn.addEventListener('click', handleButtonClick);
+                maxBtn.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    handleButtonClick();
+                }, { passive: false });
+            }
+        }
+        
+        initMaxButton();
+        
+        // === PERFECT HERO ANIMATION - NO SCROLL LISTENER ===
+        const HEADER_HEIGHT = 90;
+        const VISIBLE_PART_WHEN_CLOSED = 0; // 0px visible - right after header
+        let maxTranslateGlobal; // Will be calculated on load
+        
+        const hero = document.getElementById('hero-section');
+        const heroContent = document.getElementById('hero-main-content');
+        const headerBar = document.getElementById('hero-header-bar');
+        const contentSection = document.getElementById('content-section');
+        const pullIndicator = document.getElementById('pull-indicator');
+        const pullIndicatorHeader = document.getElementById('pull-indicator-header');
+        const headerLogo = document.getElementById('header-logo');
+        const headerBtn = document.getElementById('header-btn');
+        const heroBottomSection = document.querySelector('.hero-bottom-section');
+        const unlockText = document.querySelector('.unlock-text');
+        const mainCtaButton = document.getElementById('main-cta-button');
+        
+        let isDragging = false;
+        let startY = 0;
+        let currentTranslate = 0;
+        let isHeroOpen = true;
+        let savedScrollY = 0;
+        
+        // Calculate fixed positions
+        function initPositions() {
+            maxTranslateGlobal = -window.innerHeight;
+        }
+        
+        // === HEADER BUTTON STYLES & VISIBILITY ===
+        function updateHeaderButtonStyles() {
+            if (!headerBtn) return;
+            
+            let shouldBeFilled = false;
+            
+            if (!isHeroOpen && mainCtaButton) {
+                // Check if main CTA button has scrolled behind header
+                const rect = mainCtaButton.getBoundingClientRect();
+                shouldBeFilled = rect.top <= HEADER_HEIGHT;
+            }
+            
+            if (shouldBeFilled) {
+                headerBtn.classList.add('filled');
+            } else {
+                headerBtn.classList.remove('filled');
+            }
+        }
+
+        function updateHeaderButtonVisibility() {
+            if (!headerBtn) return;
+            
+            const shouldShow = !isHeroOpen || window.scrollY > 300;
+            
+            if (shouldShow && !headerBtn.classList.contains('visible')) {
+                headerBtn.classList.add('visible');
+            } else if (!shouldShow && headerBtn.classList.contains('visible')) {
+                headerBtn.classList.remove('visible');
+            }
+        }
+
+        // Listen for scroll events
+        window.addEventListener('scroll', function() {
+            updateHeaderButtonVisibility();
+            updateHeaderButtonStyles();
+        });
+        
+        // Update all visual elements based on current translate
+        function updateVisuals(translate) {
+            const progress = Math.max(0, Math.min(1, Math.abs(translate) / Math.abs(maxTranslateGlobal)));
+            
+            hero.style.transform = `translateY(${translate}px)`;
+            hero.style.opacity = `${1 - progress}`;
+            heroContent.style.opacity = `${1 - progress}`;
+            heroContent.style.transform = `translateY(-${progress * 30}px) scale(${1 - 0.3 * progress})`;
+            
+            if (heroBottomSection) {
+                heroBottomSection.style.opacity = `${1 - progress}`;
+            }
+            
+            if (unlockText) {
+                unlockText.style.opacity = `${1 - progress}`;
+            }
+            
+            const headerProgress = Math.max(0, Math.min(1, (progress - 0.3) / 0.7));
+            if (headerProgress > 0.1) {
+                headerBar.classList.add('visible');
+                headerBar.style.opacity = `${headerProgress}`;
+                headerBar.style.transform = `translateY(${(1 - headerProgress) * -10}px)`;
+            } else {
+                headerBar.classList.remove('visible');
+                headerBar.style.opacity = '0';
+                headerBar.style.transform = 'translateY(-10px)';
+            }
+
+            // Update header button visibility and styles
+            updateHeaderButtonVisibility();
+            updateHeaderButtonStyles();
+        }
+        
+        // === DRAG SUPPORT - FULLY INDEPENDENT (TOUCH + MOUSE) ===
+        function handleTouchStart(e) {
+            isDragging = true;
+            startY = e.touches ? e.touches[0].clientY : e.clientY;
+            hero.style.transition = 'none';
+            e.preventDefault();
+        }
+        
+        function handleTouchMove(e) {
+            if (!isDragging) return;
+            
+            const currentY = e.touches ? e.touches[0].clientY : e.clientY;
+            const deltaY = currentY - startY;
+            
+            let newTranslate;
+            if (isHeroOpen) {
+                newTranslate = Math.min(0, deltaY);
+                newTranslate = Math.max(maxTranslateGlobal, newTranslate);
+            } else {
+                newTranslate = Math.max(maxTranslateGlobal, currentTranslate + deltaY);
+                newTranslate = Math.min(0, newTranslate);
+            }
+            
+            updateVisuals(newTranslate);
+            e.preventDefault();
+        }
+        
+        function handleTouchEnd(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            
+            hero.style.transition = 'transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease-out';
+            
+            // TOGGLE state on ANY interaction - always to fixed positions
+            if (isHeroOpen) {
+                // CLOSE - EXACTLY to global fixed position
+                currentTranslate = maxTranslateGlobal;
+                hero.style.transform = `translateY(${maxTranslateGlobal}px)`;
+                hero.style.opacity = '0';
+                updateVisuals(maxTranslateGlobal);
+                isHeroOpen = false;
+                contentSection.style.top = '';
+                contentSection.classList.remove('fixed-when-hero-open');
+                document.body.style.overflow = '';
+                window.scrollTo(0, savedScrollY);
+                updateHeaderButtonVisibility();
+            } else {
+                // OPEN - EXACTLY to 0
+                savedScrollY = window.scrollY;
+                currentTranslate = 0;
+                hero.style.transform = `translateY(0px)`;
+                hero.style.opacity = '1';
+                updateVisuals(0);
+                isHeroOpen = true;
+                contentSection.style.top = `-${savedScrollY}px`;
+                contentSection.classList.add('fixed-when-hero-open');
+                document.body.style.overflow = 'hidden';
+                updateHeaderButtonVisibility();
+            }
+        }
+        
+        // Click handler for pull indicator
+        if (pullIndicator) {
+            pullIndicator.addEventListener('click', function() {
+                if (isHeroOpen) return;
+                
+                hero.style.transition = 'transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease-out';
+                
+                // OPEN
+                savedScrollY = window.scrollY;
+                currentTranslate = 0;
+                hero.style.transform = `translateY(0px)`;
+                hero.style.opacity = '1';
+                updateVisuals(0);
+                isHeroOpen = true;
+                contentSection.style.top = `-${savedScrollY}px`;
+                contentSection.classList.add('fixed-when-hero-open');
+                document.body.style.overflow = 'hidden';
+                updateHeaderButtonVisibility();
+            });
+        }
+        
+        // Click handler for pull indicator in header
+        if (pullIndicatorHeader) {
+            pullIndicatorHeader.addEventListener('click', function() {
+                if (isHeroOpen) return;
+                
+                hero.style.transition = 'transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease-out';
+                
+                // OPEN
+                savedScrollY = window.scrollY;
+                currentTranslate = 0;
+                hero.style.transform = `translateY(0px)`;
+                hero.style.opacity = '1';
+                updateVisuals(0);
+                isHeroOpen = true;
+                contentSection.style.top = `-${savedScrollY}px`;
+                contentSection.classList.add('fixed-when-hero-open');
+                document.body.style.overflow = 'hidden';
+                updateHeaderButtonVisibility();
+            });
+        }
+        
+        // Click handler for header logo - scroll to top and open hero
+        if (headerLogo) {
+            headerLogo.addEventListener('click', function(e) {
+                e.stopPropagation();
+                
+                hero.style.transition = 'transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease-out';
+                
+                // OPEN hero
+                savedScrollY = window.scrollY;
+                currentTranslate = 0;
+                hero.style.transform = `translateY(0px)`;
+                hero.style.opacity = '1';
+                updateVisuals(0);
+                isHeroOpen = true;
+                contentSection.style.top = `-${savedScrollY}px`;
+                contentSection.classList.add('fixed-when-hero-open');
+                document.body.style.overflow = 'hidden';
+                updateHeaderButtonVisibility();
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+        
+        // Prevent touch events from interfering with button and logo
+        if (headerBtn) {
+            headerBtn.addEventListener('touchstart', function(e) {
+                e.stopPropagation();
+            });
+            headerBtn.addEventListener('touchmove', function(e) {
+                e.stopPropagation();
+            });
+            headerBtn.addEventListener('touchend', function(e) {
+                e.stopPropagation();
+            });
+        }
+        
+        if (headerLogo) {
+            headerLogo.addEventListener('touchstart', function(e) {
+                e.stopPropagation();
+            });
+            headerLogo.addEventListener('touchmove', function(e) {
+                e.stopPropagation();
+            });
+        }
+        
+        // Add touch + mouse event listeners to hero, header bar, and indicator
+        const dragTargets = [hero, headerBar, pullIndicator, pullIndicatorHeader].filter(Boolean);
+        dragTargets.forEach(target => {
+            // Touch events
+            target.addEventListener('touchstart', handleTouchStart, { passive: false });
+            target.addEventListener('touchmove', handleTouchMove, { passive: false });
+            target.addEventListener('touchend', handleTouchEnd);
+            target.addEventListener('touchcancel', handleTouchEnd);
+            
+            // Mouse events
+            target.addEventListener('mousedown', handleTouchStart);
+            document.addEventListener('mousemove', handleTouchMove);
+            document.addEventListener('mouseup', handleTouchEnd);
+            document.addEventListener('mouseleave', handleTouchEnd);
+        });
+        
+        // Init positions on load and window resize
+        initPositions();
+        window.addEventListener('resize', () => {
+            initPositions();
+            // If closed, reapply fixed position
+            if (!isHeroOpen) {
+                hero.style.transform = `translateY(${maxTranslateGlobal}px)`;
+                updateVisuals(maxTranslateGlobal);
+            }
+        });
+        
+        // Initial render
+        document.body.style.overflow = 'hidden';
+        contentSection.classList.add('fixed-when-hero-open');
+        updateHeaderButtonVisibility();
+        
+        // Update copyright year dynamically
+        const copyrightElement = document.getElementById('copyright-year');
+        if (copyrightElement) {
+            const currentYear = new Date().getFullYear();
+            const startYear = 2026;
+            if (currentYear === startYear) {
+                copyrightElement.textContent = `© ${startYear} Умпульс. Все права защищены.`;
+            } else {
+                copyrightElement.textContent = `© ${startYear}-${currentYear} Умпульс. Все права защищены.`;
+            }
+        }
+    </script>
+</body>
+</html>
